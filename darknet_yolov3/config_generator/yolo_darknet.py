@@ -5,10 +5,10 @@ YOLO Network Descriptor
 @author: Abdullahi S. Adamu
 """
 
-from darknet_yolov3.yolo_connections import *
-from darknet_yolov3.yolo_layers import *
-from darknet_yolov3.yolo_optimizers import *
-from darknet_yolov3.yolo_preprocess import *
+from darknet_yolov3.config_generator.yolo_connections import *
+from darknet_yolov3.config_generator.yolo_layers import *
+from darknet_yolov3.config_generator.yolo_optimizers import *
+from darknet_yolov3.config_generator.yolo_preprocess import *
 from darknet_yolov3.config_generator.common import *
 from darknet_yolov3.config_generator.yolo_network import get_yolov3
 
