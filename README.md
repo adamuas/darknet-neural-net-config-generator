@@ -1,4 +1,4 @@
-# YOLO v3 Darknet Network Configuration Generator
+# Darknet Neural Network Configuration Generator
 @author: Adamu A. S
 
 
