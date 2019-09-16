@@ -7,6 +7,7 @@ YOLO Network Descriptor
 from absl import logging
 from darknet_config_generator.yolo_optimizers import *
 from darknet_config_generator.yolo_preprocess import *
+from darknet_config_generator.yolo_layers import Layer
 from darknet_config_generator.yolo_network import get_yolov3
 from darknet_config_generator.common import NL
 
