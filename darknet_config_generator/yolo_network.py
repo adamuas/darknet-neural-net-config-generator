@@ -6,11 +6,11 @@ Includes descriptors of convolution blocks
 @author: Abdullahi S. Adamu
 """
 
-from darknet_yolov3.config_generator.yolo_connections import *
-from darknet_yolov3.config_generator.yolo_layers import *
-from darknet_yolov3.config_generator.yolo_optimizers import *
-from darknet_yolov3.config_generator.yolo_preprocess import *
-from darknet_yolov3.config_generator.common import *
+from darknet_config_generator.yolo_connections import *
+from darknet_config_generator.yolo_layers import *
+from darknet_config_generator.yolo_optimizers import *
+from darknet_config_generator.yolo_preprocess import *
+from darknet_config_generator.common import *
 
 
 """ 

@@ -5,7 +5,7 @@ Image Augmentation
 @author: Abdullahi S. Adamu
 """
 
-from darknet_yolov3.config_generator.common import *
+from darknet_config_generator.common import *
 
 
 """Image Augmentation"""
