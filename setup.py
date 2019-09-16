@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="darknet_config_generator",
-    version="0.0.1",
+    version="1.0.0",
     author="Abdullahi S. Adamu",
     author_email="abdullah.adam89@gmail.com",
     description="Darknet Neural Network Configuration Generator",
