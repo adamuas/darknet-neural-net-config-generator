@@ -7,7 +7,7 @@ If you have used darknet for one of your projects, you also understand the pain 
 
 Give it a try with your next darknet project :-) 
 
-#### How to install?
+#### How to install
 * You can pip install network configuration generator as shown below:
 ```
 pip install darknet-config-generator==1.0.1 
