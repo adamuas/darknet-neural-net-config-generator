@@ -38,6 +38,7 @@ class ConvolutionLayer(Layer):
         file_obj.write(f'activation={self.activation}{NL}')
         file_obj.write(NL)
 
+
 class SoftmaxLayer(Layer):
     """
     Softmax Layer
@@ -55,11 +56,11 @@ class SoftmaxLayer(Layer):
         file_obj.write(NL)
 
 
-class MaxPoolLayer(Layer):
+class MaxPoolingLayer(Layer):
     """
     MaxPooling layer
     """
-    def __init__(self, size, stride, padding):
+    def __init__(self, size:int=3, stride:int=2, padding:int=0):
         self.__HEADER__ = '[maxpool]'
         self.size = size
         self.stride = stride
@@ -74,12 +75,10 @@ class MaxPoolLayer(Layer):
         file_obj.write(f'padding={self.padding}{NL}')
         file_obj.write(NL)
 
-
 class FullyConnectedLayer(Layer):
     """
     Fully Connected Layer
     """
-
     def __init__(self, size:int=1000, activation=Activations.LINEAR.value):
         self.__HEADER__ = '[connected]'
         self.size = size
@@ -93,24 +92,22 @@ class FullyConnectedLayer(Layer):
         file_obj.write(f'activation={self.activation}{NL}')
         file_obj.write(NL)
 
-
 class DropOutLayer(Layer):
     """
     DropOut Layer
     """
 
-    def __init__(self, drop_out_prob:float=0.5):
+    def __init__(self, dropout_prob:float=0.5):
         self.__HEADER__ = '[dropout]'
-        self.drop_out_prob = drop_out_prob
+        self.dropout_prob = dropout_prob
 
     def export(self, file_obj):
         """exports dropout layer to the config file"""
         file_obj.write(f'{NL}')
         file_obj.write(f'{self.__HEADER__}{NL}')
-        file_obj.write(f'probability={self.drop_out_prob}{NL}')
+        file_obj.write(f'probability={self.dropout_prob}{NL}')
         file_obj.write(NL)
 
-        
 class YOLOLayer(Layer):
     """ 
     Object Detection Layer
