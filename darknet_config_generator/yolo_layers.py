@@ -38,6 +38,61 @@ class ConvolutionLayer(Layer):
         file_obj.write(f'activation={self.activation}{NL}')
         file_obj.write(NL)
 
+class SoftmaxLayer(Layer):
+    """
+    Softmax Layer
+    """
+
+    def __init__(self):
+        self.__HEADER__ = '[softmax]'
+
+
+class MaxPoolLayer(Layer):
+    """
+    """
+    def __init__(self, size, stride, padding):
+        self.__HEADER__ = '[maxpool]'
+        self.size = size
+        self.stride = stride
+        self.padding = padding
+
+    def export(self, file_obj):
+        """exports maxpooling layer to file"""
+
+
+class FullyConnectedLayer(Layer):
+    """
+    Fully Connected Layer
+    """
+
+    def __init__(self, size:int=1000, activation=Activations.LINEAR.value):
+        self.__HEADER__ = '[connected]'
+        self.size = size
+        self.activation = activation
+    
+    def export(self, file_obj):
+        """exports to fileobject"""
+        file_obj.write(f'{NL}')
+        file_obj.write(f'{self.__HEADER__}{NL}')
+        file_obj.write(f'output={self.size}')
+        file_obj.write(f'activation={self.activation}')
+
+
+class DropOutLayer(Layer):
+    """
+    DropOut Layer
+    """
+
+    def __init__(self, drop_out_prob:float=0.5):
+        self.__HEADER__ = '[dropout]'
+        self.drop_out_prob = drop_out_prob
+
+    def export(self, file_obj):
+        """exports dropout layer to the config file"""
+        file_obj.write(f'{NL}')
+        file_obj.write(f'{self.__HEADER__}{NL}')
+        file_obj.write(f'probability={self.drop_out_prob}')
+
         
 class YOLOLayer(Layer):
     """ 
@@ -70,10 +125,9 @@ class YOLOLayer(Layer):
         file_obj.write(f'truth_thresh={self.truth_thresh}{NL}')
         file_obj.write(f'random={self.random}{NL}')
         
-
 class UpsampleLayer(Layer):
     """ Upsampling Layer"""
-    def __init__(self, stride=2):
+    def __init__(self, stride:int=2):
         self.__HEADER__ = '[upsample]'
         self.stride = stride
         
@@ -83,3 +137,4 @@ class UpsampleLayer(Layer):
         file_obj.write(f'{self.__HEADER__}{NL}')
         file_obj.write(f'stride={self.stride}{NL}')
         file_obj.write(NL)
+

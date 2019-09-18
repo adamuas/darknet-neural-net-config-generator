@@ -18,6 +18,7 @@ class Activations(Enum):
 
 class LearningRateDecayPolicy:
     SCHEDULED ='steps'
+    POLY = 'poly'
 
 # Functions
 def list_to_str(lst, space=False):
