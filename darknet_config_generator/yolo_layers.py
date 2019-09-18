@@ -43,12 +43,21 @@ class SoftmaxLayer(Layer):
     Softmax Layer
     """
 
-    def __init__(self):
+    def __init__(self, groups=1):
         self.__HEADER__ = '[softmax]'
+        self.groups = groups
+
+    def export(self, file_obj):
+        """exports to fileobject"""
+        file_obj.write(f'{NL}')
+        file_obj.write(f'{self.__HEADER__}{NL}')
+        file_obj.write(f'groups={self.groups}{NL}')
+        file_obj.write(NL)
 
 
 class MaxPoolLayer(Layer):
     """
+    MaxPooling layer
     """
     def __init__(self, size, stride, padding):
         self.__HEADER__ = '[maxpool]'
@@ -58,6 +67,12 @@ class MaxPoolLayer(Layer):
 
     def export(self, file_obj):
         """exports maxpooling layer to file"""
+        file_obj.write(f'{NL}')
+        file_obj.write(f'{self.__HEADER__}{NL}')
+        file_obj.write(f'size={self.size}{NL}')
+        file_obj.write(f'stride={self.stride}{NL}')
+        file_obj.write(f'padding={self.padding}{NL}')
+        file_obj.write(NL)
 
 
 class FullyConnectedLayer(Layer):
@@ -74,8 +89,9 @@ class FullyConnectedLayer(Layer):
         """exports to fileobject"""
         file_obj.write(f'{NL}')
         file_obj.write(f'{self.__HEADER__}{NL}')
-        file_obj.write(f'output={self.size}')
-        file_obj.write(f'activation={self.activation}')
+        file_obj.write(f'output={self.size}{NL}')
+        file_obj.write(f'activation={self.activation}{NL}')
+        file_obj.write(NL)
 
 
 class DropOutLayer(Layer):
@@ -91,7 +107,8 @@ class DropOutLayer(Layer):
         """exports dropout layer to the config file"""
         file_obj.write(f'{NL}')
         file_obj.write(f'{self.__HEADER__}{NL}')
-        file_obj.write(f'probability={self.drop_out_prob}')
+        file_obj.write(f'probability={self.drop_out_prob}{NL}')
+        file_obj.write(NL)
 
         
 class YOLOLayer(Layer):
