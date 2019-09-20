@@ -114,3 +114,41 @@ def get_alexnet(num_classes=80):
     - list of layers
     """
 
+    layers = []
+    layers += [ConvolutionLayer(size=11, stride=4, filters=96, 
+                        activation=Activations.LEAKY_RELU.value),
+                MaxPoolingLayer(size=3, stride=2, padding=0)]
+
+    
+    layers += [ConvolutionLayer(filters=256, size=5, stride=1, pad=1, 
+                        activation=Activations.LEAKY_RELU.value), 
+                MaxPoolingLayer(size=3, stride=2, padding=0)]
+
+    layers += [ConvolutionLayer(filters=384, size=3, stride=1, pad=1),
+                ConvolutionLayer(filters=384, size=3, stride=1, pad=1)]
+
+    layers += [ConvolutionLayer(filters=256, size=3, stride=1, pad=1, 
+                        activation=Activations.LEAKY_RELU.value),
+                MaxPoolingLayer(size=3, stride=2, padding=0)]
+
+    layers += [FullyConnectedLayer(size=4096, 
+                        activation=Activations.LEAKY_RELU.value),
+                DropOutLayer(dropout_prob=0.5)] * 2
+    
+    layers += [FullyConnectedLayer(size=1000, 
+                                activation=Activations.LINEAR.value)]
+
+    layers += [SoftmaxLayer()]
+
+    return layers
+                                                        
+
+
+
+    
+
+
+
+
+
+

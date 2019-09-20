@@ -3,7 +3,7 @@ Layer Descriptors
 
 @author: Abdullahi S. Adamu
 """
-from darknet_config_generator.common import *
+from darknet_config_generator.common import NL, Activations
 
 """ Layers """
 class Layer:

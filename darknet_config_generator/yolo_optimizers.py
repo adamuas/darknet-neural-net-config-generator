@@ -9,6 +9,24 @@ Optimizer Descriptor
 from darknet_config_generator.common import *
 
 
+""" Learning Rate Decay Policies """
+class ScheduledLRDecay:
+    """
+    Learning rate decay policy
+    """
+    def __init__(self, lr_decay_schedule={400000:0.1, 450000:0.1}):
+        self.__HEADER__= '# LR Policy'
+        self.policy = LearningRateDecayPolicy.SCHEDULED
+        self.lr_decay_schedule = lr_decay_schedule
+
+    def export(self, file_obj):
+        """ exports learning rate decay policy """
+        file_obj.write(f'{NL}')
+        file_obj.write(f'{self.__HEADER__}{NL}')
+        file_obj.write(f'policy={self.policy}{NL}')
+        file_obj.write(f'steps={list_to_str(self.lr_decay_schedule.keys())}{NL}')
+        file_obj.write(f'scales={list_to_str(self.lr_decay_schedule.values())}{NL}')
+
 """Network Optimization """
 class YOLOOptimizer:
     def __init__(self, learning_rate:float=0.001, batch_size=64, subdivisions=64, num_gpus:int=2,
