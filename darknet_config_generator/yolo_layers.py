@@ -3,7 +3,7 @@ Layer Descriptors
 
 @author: Abdullahi S. Adamu
 """
-from darknet_config_generator.common import *
+from darknet_config_generator.common import NL, Activations
 
 """ Layers """
 class Layer:
@@ -38,7 +38,76 @@ class ConvolutionLayer(Layer):
         file_obj.write(f'activation={self.activation}{NL}')
         file_obj.write(NL)
 
-        
+
+class SoftmaxLayer(Layer):
+    """
+    Softmax Layer
+    """
+
+    def __init__(self, groups=1):
+        self.__HEADER__ = '[softmax]'
+        self.groups = groups
+
+    def export(self, file_obj):
+        """exports to fileobject"""
+        file_obj.write(f'{NL}')
+        file_obj.write(f'{self.__HEADER__}{NL}')
+        file_obj.write(f'groups={self.groups}{NL}')
+        file_obj.write(NL)
+
+
+class MaxPoolingLayer(Layer):
+    """
+    MaxPooling layer
+    """
+    def __init__(self, size:int=3, stride:int=2, padding:int=0):
+        self.__HEADER__ = '[maxpool]'
+        self.size = size
+        self.stride = stride
+        self.padding = padding
+
+    def export(self, file_obj):
+        """exports maxpooling layer to file"""
+        file_obj.write(f'{NL}')
+        file_obj.write(f'{self.__HEADER__}{NL}')
+        file_obj.write(f'size={self.size}{NL}')
+        file_obj.write(f'stride={self.stride}{NL}')
+        file_obj.write(f'padding={self.padding}{NL}')
+        file_obj.write(NL)
+
+class FullyConnectedLayer(Layer):
+    """
+    Fully Connected Layer
+    """
+    def __init__(self, size:int=1000, activation=Activations.LINEAR.value):
+        self.__HEADER__ = '[connected]'
+        self.size = size
+        self.activation = activation
+    
+    def export(self, file_obj):
+        """exports to fileobject"""
+        file_obj.write(f'{NL}')
+        file_obj.write(f'{self.__HEADER__}{NL}')
+        file_obj.write(f'output={self.size}{NL}')
+        file_obj.write(f'activation={self.activation}{NL}')
+        file_obj.write(NL)
+
+class DropOutLayer(Layer):
+    """
+    DropOut Layer
+    """
+
+    def __init__(self, dropout_prob:float=0.5):
+        self.__HEADER__ = '[dropout]'
+        self.dropout_prob = dropout_prob
+
+    def export(self, file_obj):
+        """exports dropout layer to the config file"""
+        file_obj.write(f'{NL}')
+        file_obj.write(f'{self.__HEADER__}{NL}')
+        file_obj.write(f'probability={self.dropout_prob}{NL}')
+        file_obj.write(NL)
+
 class YOLOLayer(Layer):
     """ 
     Object Detection Layer
@@ -70,10 +139,9 @@ class YOLOLayer(Layer):
         file_obj.write(f'truth_thresh={self.truth_thresh}{NL}')
         file_obj.write(f'random={self.random}{NL}')
         
-
 class UpsampleLayer(Layer):
     """ Upsampling Layer"""
-    def __init__(self, stride=2):
+    def __init__(self, stride:int=2):
         self.__HEADER__ = '[upsample]'
         self.stride = stride
         
@@ -83,3 +151,4 @@ class UpsampleLayer(Layer):
         file_obj.write(f'{self.__HEADER__}{NL}')
         file_obj.write(f'stride={self.stride}{NL}')
         file_obj.write(NL)
+

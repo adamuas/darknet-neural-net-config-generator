@@ -46,7 +46,14 @@ def _get_downsample_conv2d(filters=128, size=3, stride=2, pad=1, activation=Acti
 
 
 def get_yolov3(num_classes=80, anchors=YOLO_ANCHORS, num_anchors=9):
-    """ returns yolo v3 network architecture """
+    """ 
+    returns YOLO v3 Network Architecture 
+
+    params:
+    - num_classes (int) - number of classes
+    - anchors (list(int)) - List of anchors  [x_1,y_1,..x_2,y_2...x_n,y_n]
+    - num_anchors (int) - number of anchors
+    """
     layers = []
 
     layers = _get_first_conv2d_block(start_filters=32)
@@ -94,4 +101,54 @@ def get_yolov3(num_classes=80, anchors=YOLO_ANCHORS, num_anchors=9):
     layers += [YOLOLayer(anchors=anchors, num_classes=num_classes, masks=[0,1,2])]
     
     return layers
+
+
+def get_alexnet(num_classes=80):
+    """
+    returns AlexNet layers
+
+    params:
+    - num_classes (int) - number of classes
+
+    returns:
+    - list of layers
+    """
+
+    layers = []
+    layers += [ConvolutionLayer(size=11, stride=4, filters=96, 
+                        activation=Activations.LEAKY_RELU.value),
+                MaxPoolingLayer(size=3, stride=2, padding=0)]
+
+    
+    layers += [ConvolutionLayer(filters=256, size=5, stride=1, pad=1, 
+                        activation=Activations.LEAKY_RELU.value), 
+                MaxPoolingLayer(size=3, stride=2, padding=0)]
+
+    layers += [ConvolutionLayer(filters=384, size=3, stride=1, pad=1),
+                ConvolutionLayer(filters=384, size=3, stride=1, pad=1)]
+
+    layers += [ConvolutionLayer(filters=256, size=3, stride=1, pad=1, 
+                        activation=Activations.LEAKY_RELU.value),
+                MaxPoolingLayer(size=3, stride=2, padding=0)]
+
+    layers += [FullyConnectedLayer(size=4096, 
+                        activation=Activations.LEAKY_RELU.value),
+                DropOutLayer(dropout_prob=0.5)] * 2
+    
+    layers += [FullyConnectedLayer(size=1000, 
+                                activation=Activations.LINEAR.value)]
+
+    layers += [SoftmaxLayer()]
+
+    return layers
+                                                        
+
+
+
+    
+
+
+
+
+
 
