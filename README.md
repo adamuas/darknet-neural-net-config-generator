@@ -14,5 +14,5 @@ pip install darknet-config-generator==1.0.1
 ```
 
 #### Where do I go from here?
-- Introduction.ipynb - Suggest Provides an Example Usage of the darknet config generator with YoloV3 Network.
+- Introduction.ipynb -  Provides an Example Usage of the darknet config generator with YoloV3 Network.
 - example_generated.cfg - The resulting configuration file generation from Introduction.ipynb
